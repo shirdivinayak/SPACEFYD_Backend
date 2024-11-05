@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "mongodb": "^6.10.0",
+    "restify": "^11.1.0",
+    "restify-router": "^0.6.2"
+  }
+}
