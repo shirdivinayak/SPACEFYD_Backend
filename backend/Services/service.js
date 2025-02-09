@@ -17,10 +17,10 @@ module.exports = {
     },
 
 
-    addCategory: async function(id,name,image) {
+    addCategory: async function(name) {
         try {
-            const category={id,name,image}
-            const result = await dbOperation.executeMongoQuery('SPACEFYD', 'insert', [category]);
+            const category={name}
+            const result = await dbOperation.executeMongoQuery('Categories', 'insert', [category]);
             return { success: true, data: result };
         } catch (error) {
             return { success: false, error: error.message };
@@ -30,7 +30,7 @@ module.exports = {
     deleteCategory:async function (id) {
         try{
             const category={id}
-            const result= await dbOperation.executeMongoQuery('SPACEFYD','delete',category);
+            const result= await dbOperation.executeMongoQuery('Categories','delete',category);
             return { success: true, data: result };
 
         }catch(e){
@@ -42,7 +42,7 @@ module.exports = {
     displayCategory:async function () {
         try{
            
-            const result= await dbOperation.executeMongoQuery('SPACEFYD','find',{});
+            const result= await dbOperation.executeMongoQuery('Categories','find',{});
             return { success: true, data: result };
 
         }catch(e){
@@ -50,11 +50,12 @@ module.exports = {
         }
         
     },
+
 
     displayCategoryById:async function (id) {
         try{
            const category={id}
-            const result= await dbOperation.executeMongoQuery('SPACEFYD','find',{category});
+            const result= await dbOperation.executeMongoQuery('Categories','find',{category});
             return { success: true, data: result };
 
         }catch(e){
@@ -63,10 +64,10 @@ module.exports = {
         
     },
 
-    addProduct:async function (name,description,categoryId,productCode,brand,image) {
+    addProduct:async function (productName,description,categoryName,productCode,brand,image,isVisible,isTrending) {
         try{
-            const category={name,description,categoryId,productCode,brand,image}
-            const result= await dbOperation.executeMongoQuery('SPACEFYD','insert',[category]);
+            const category={productName,description,categoryName,productCode,brand,image,isVisible,isTrending}
+            const result= await dbOperation.executeMongoQuery('Products','insert',[category]);
             return { success: true, data: result };
 
         }catch(e){
@@ -77,7 +78,7 @@ module.exports = {
 
     displayProduct:async function () {
         try{
-            const result= await dbOperation.executeMongoQuery('SPACEFYD','find',{});
+            const result= await dbOperation.executeMongoQuery('Products','find',{});
             return { success: true, data: result };
 
         }catch(e){
@@ -89,7 +90,7 @@ module.exports = {
     displayProductByID:async function (id) {
         try{
             const category=id
-            const result= await dbOperation.executeMongoQuery('SPACEFYD','find',{category});
+            const result= await dbOperation.executeMongoQuery('Products','find',{category});
             return { success: true, data: result };
 
         }catch(e){
@@ -99,10 +100,10 @@ module.exports = {
     },
 
 
-    addProject:async function (projectName,projectDescription,categoryId,isVisible) {
+    addProject:async function (projectName,projectDescription,categoryName,ProjectCode,isVisible) {
         try{
-            const category={projectName,projectDescription,categoryId,isVisible}
-            const result= await dbOperation.executeMongoQuery('SPACEFYD','insert',[category]);
+            const category={projectName,projectDescription,categoryName,ProjectCode,isVisible}
+            const result= await dbOperation.executeMongoQuery('Projects','insert',[category]);
             return { success: true, data: result };
 
         }catch(e){
@@ -113,8 +114,9 @@ module.exports = {
 
     displayProject:async function () {
         try{
-            const result= await dbOperation.executeMongoQuery('SPACEFYD','find',{});
-            return { success: true, data: result };
+            const result= await dbOperation.executeMongoQuery('Projects','find',{});
+            console.log(result)
+            return result ;
 
         }catch(e){
             return { success: false, error: error.message };
@@ -125,7 +127,7 @@ module.exports = {
     displayProjectByID:async function (id) {
         try{
             const category=id
-            const result= await dbOperation.executeMongoQuery('SPACEFYD','find',{category});
+            const result= await dbOperation.executeMongoQuery('Projects','find',{category});
             return { success: true, data: result };
 
         }catch(e){
@@ -137,7 +139,7 @@ module.exports = {
     addBrand:async function (brandName,image) {
         try{
             const category={brandName,image}
-            const result= await dbOperation.executeMongoQuery('SPACEFYD','find',[category]);
+            const result= await dbOperation.executeMongoQuery('Brand','find',[category]);
             return { success: true, data: result };
 
         }catch(e){
@@ -145,9 +147,4 @@ module.exports = {
         }
         
     },
-    
-    
-
-    
-
  }
